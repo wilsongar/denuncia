@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Denuncia</h1>
+                    <h1>Create User</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'denuncias.store','enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => 'users.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('denuncias.fields')
+                    @include('users.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('denuncias.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

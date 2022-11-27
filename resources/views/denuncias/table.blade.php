@@ -15,13 +15,13 @@
         <tbody>
         @foreach($denuncias as $denuncia)
             <tr>
-                <td>{{ $denuncia->imagen }}</td>
+            <td><img src="{{ asset('storage').'/'.$denuncia->imagen}}" width="50" height="50"></td>
             <td>{{ $denuncia->descripcion }}</td>
             <td>{{ $denuncia->latitud }}</td>
             <td>{{ $denuncia->longitud }}</td>
             <td>{{ $denuncia->fecha }}</td>
-            <td>{{ $denuncia->id_categoria }}</td>
-            <td>{{ $denuncia->id_estado }}</td>
+            <td>{{ $denuncia->categoria->nombre }}</td>
+            <td>{{ $denuncia->estado->nombre }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['denuncias.destroy', $denuncia->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

@@ -29,3 +29,6 @@ Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
 
 
 Route::resource('denuncias', App\Http\Controllers\DenunciaController::class);
+
+
+Route::resource('users', App\Http\Controllers\UserController::class);

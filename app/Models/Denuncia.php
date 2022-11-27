@@ -70,5 +70,12 @@ class Denuncia extends Model
         'id_estado' => 'required'
     ];
 
-    
+      public function categoria (){
+     return $this-> belongsTo('App\Models\Categoria','id_categoria');
+
+    }
+      public function estado (){
+     return $this-> belongsTo('App\Models\Estado','id_estado');
+
+    }
 }

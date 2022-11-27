@@ -61,7 +61,9 @@ class DenunciaController extends AppBaseController
     public function store(CreateDenunciaRequest $request)
     {
         $input = $request->all();
-
+         if($request->hasFile('imagen')){
+            $input['imagen']=$request->file('imagen')->store('uploads','public');   
+        }
         $denuncia = $this->denunciaRepository->create($input);
 
         Flash::success('Denuncia saved successfully.');
@@ -99,6 +101,8 @@ class DenunciaController extends AppBaseController
     public function edit($id)
     {
         $denuncia = $this->denunciaRepository->find($id);
+        $estado = Estado::pluck('nombre','id');
+        $categoria = Categoria::pluck('nombre','id');   
 
         if (empty($denuncia)) {
             Flash::error('Denuncia not found');
@@ -106,7 +110,7 @@ class DenunciaController extends AppBaseController
             return redirect(route('denuncias.index'));
         }
 
-        return view('denuncias.edit')->with('denuncia', $denuncia);
+        return view('denuncias.edit',compact('denuncia','estado','categoria'));
     }
 
     /**
