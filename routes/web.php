@@ -20,7 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/mapa_denuncias', [App\Http\Controllers\DenunciaController::class, 'mapa'])->name('mapa');
+Route::get('/geojson', [App\Http\Controllers\DenunciaController::class, 'geojson'])->name('geojson');
 
 Route::resource('estados', App\Http\Controllers\EstadoController::class);
 

@@ -33,4 +33,11 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{ route('mapa') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+       <i class="fa fas-solid fa-map"></i>
+        <p>Mapa de Denuncias</p>
+    </a>
+</li>
 

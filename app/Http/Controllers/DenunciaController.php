@@ -50,7 +50,38 @@ class DenunciaController extends AppBaseController
         return view('denuncias.create',compact('estado','categoria'));
     
     }
+    public function mapa(){
 
+
+        $denuncias = $this->denunciaRepository->all(); 
+
+        $estado = Estado::pluck('nombre','id');
+        $estado->prepend('Todos');
+        $categoria = Categoria::pluck('nombre','id');
+         $categoria->prepend('Todos'); 
+         return view('denuncias.mapa_denuncia')
+            ->with('denuncias', $denuncias)->with('categoria',$categoria)->with('estado',$estado);
+    }  
+
+    public function geoJson () 
+    {
+
+        $locales =  $this->denunciaRepository->all();
+        $original_data = json_decode($locales, true);
+        $features = array();
+
+        foreach($original_data as $key => $value) { 
+            $features[] = array(
+                    'type' => 'Feature',
+                    'geometry' => array('type' => 'Point', 'coordinates' => array((float)$value['longitud'],(float)$value['latitud'])),
+                    'properties' => array('id' => $value['id'], 'descripcion' => $value['descripcion'],'categoria' => $value['id_categoria'],'estado' => $value['id_estado']),
+                    );
+            };   
+
+        $allfeatures = array('type' => 'FeatureCollection', 'features' => $features);
+        return json_encode($allfeatures, JSON_PRETTY_PRINT);
+
+    }
     /**
      * Store a newly created Denuncia in storage.
      *
