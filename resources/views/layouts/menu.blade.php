@@ -40,3 +40,11 @@
         <p>Mapa de Denuncias</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('audits.index') }}"
+       class="nav-link {{ Request::is('audits*') ? 'active' : '' }}">
+       <i class="fa fas-solid fa-table"></i>
+        <p>Auditoria</p>
+    </a>
+</li>
+

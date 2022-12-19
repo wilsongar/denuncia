@@ -28,7 +28,7 @@ Route::get('/geojson', [App\Http\Controllers\DenunciaController::class, 'geojson
 
 Route::resource('estados', App\Http\Controllers\EstadoController::class);
 
-
+Route::resource('audits', App\Http\Controllers\AuditController::class);
 Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
 
 

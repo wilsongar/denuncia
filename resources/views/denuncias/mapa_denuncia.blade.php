@@ -147,8 +147,14 @@ const orangeIcon = new L.Icon({
       return L.marker(latlng,{icon: getColor(feature.properties.id)});
     },
     onEachFeature: function (feature, layer) {
-      if(feature['properties']['estado'] === false ){
-        layer.options.opacity = 0.7;
+      if(feature['properties']['estado'] === 'Activo' ){
+        layer.options.opacity = 1;
+    }
+     if(feature['properties']['estado'] === 'En tramite' ){
+        layer.options.opacity = 0.75;
+    }
+     if(feature['properties']['estado'] === 'Finalizado' ){
+        layer.options.opacity = 0.4;
     }
     layer.bindPopup("Denuncia ID: "+feature.properties.id+" Descripcion: "+feature.properties.descripcion+" Categoria: "+feature.properties.categoria+" Estado: "+feature.properties.estado+""
     );
