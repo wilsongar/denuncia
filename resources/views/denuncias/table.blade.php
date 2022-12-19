@@ -1,5 +1,5 @@
-<div class="table-responsive">
-    <table class="table" id="denuncias-table">
+<div class="table-responsive" style="padding:15px;">
+    <table class="table" id="tabla">
         <thead>
         <tr>
             <th>Imagen</th>
@@ -7,9 +7,9 @@
         <th>Latitud</th>
         <th>Longitud</th>
         <th>Fecha</th>
-        <th>Id Categoria</th>
-        <th>Id Estado</th>
-            <th colspan="3">Action</th>
+        <th>Categoria</th>
+        <th>Estado</th>
+            <th>Accion</th>
         </tr>
         </thead>
         <tbody>

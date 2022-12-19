@@ -76,16 +76,16 @@ class DenunciaController extends AppBaseController
         $locales;
 
         if($categoria==0 & $estado==0 ){
-            $locales =  $this->denunciaRepository->all();
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->get();
         }
         if($categoria>0 & $estado==0 ){
-            $locales =  Denuncia::where('id_categoria',$categoria)->get();
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where('id_categoria',$categoria)->get();
         }
         if($categoria==0 & $estado>0 ){
-            $locales =  Denuncia::where('id_estado',$estado)->get();
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where('id_estado',$estado)->get();
         }
         if($categoria>0 & $estado>0 ){
-            $locales = Denuncia::where(['id_categoria'=>$categoria, 'id_estado'=>$estado])->get();
+            $locales = Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where(['id_categoria'=>$categoria, 'id_estado'=>$estado])->get();
         }
 
 
@@ -96,7 +96,7 @@ class DenunciaController extends AppBaseController
             $features[] = array(
                     'type' => 'Feature',
                     'geometry' => array('type' => 'Point', 'coordinates' => array((float)$value['longitud'],(float)$value['latitud'])),
-                    'properties' => array('id' => $value['id'], 'descripcion' => $value['descripcion'],'categoria' => $value['id_categoria'],'estado' => $value['id_estado']),
+                    'properties' => array('id' => $value['id'], 'descripcion' => $value['descripcion'],'categoria_id' => $value['id_categoria'],'estado_id' => $value['id_estado'],'fecha' => $value['fecha'],'categoria' => $value['categoria'], 'estado' => $value['estado']),
                     );
             };   
 

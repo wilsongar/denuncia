@@ -137,12 +137,15 @@ const orangeIcon = new L.Icon({
 
     layer= L.geoJSON(null,{
     pointToLayer: function (feature, latlng) {
-      return L.marker(latlng,{
-            
-         icon: getColor(feature.properties.id)
+      return L.marker(latlng,{icon: getColor(feature.properties.id)});
+    },
+    onEachFeature: function (feature, layer) {
+      if(feature['properties']['estado'] === false ){
+        layer.options.opacity = 0.7;
     }
-        );
-    }
+    layer.bindPopup("Denuncia ID: "+feature.properties.id+" Descripcion: "+feature.properties.descripcion+" Categoria: "+feature.properties.categoria+" Estado: "+feature.properties.estado+""
+    );
+  }
   });
 
 layer.addData(JSON.parse(data));
