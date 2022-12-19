@@ -1,3 +1,4 @@
+@can('borrar-denuncia')
 <li class="nav-item">
     <a href="{{ route('estados.index') }}"
        class="nav-link {{ Request::is('estados*') ? 'active' : '' }}">
@@ -5,8 +6,8 @@
         <p>Estados</p>
     </a>
 </li>
-
-
+@endcan
+@can('borrar-denuncia')
 <li class="nav-item">
     <a href="{{ route('categorias.index') }}"
        class="nav-link {{ Request::is('categorias*') ? 'active' : '' }}">
@@ -14,7 +15,7 @@
         <p>Categorias</p>
     </a>
 </li>
-
+@endcan
 
 <li class="nav-item">
     <a href="{{ route('denuncias.index') }}"
@@ -24,7 +25,7 @@
     </a>
 </li>
 
-
+@can('borrar-denuncia')
 <li class="nav-item">
     <a href="{{ route('users.index') }}"
        class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
@@ -32,6 +33,7 @@
         <p>Usuarios</p>
     </a>
 </li>
+@endcan
 
 <li class="nav-item">
     <a href="{{ route('mapa') }}"
@@ -40,6 +42,10 @@
         <p>Mapa de Denuncias</p>
     </a>
 </li>
+
+  
+
+@can('borrar-denuncia')
 <li class="nav-item">
     <a href="{{ route('audits.index') }}"
        class="nav-link {{ Request::is('audits*') ? 'active' : '' }}">
@@ -47,4 +53,4 @@
         <p>Auditoria</p>
     </a>
 </li>
-
+@endcan

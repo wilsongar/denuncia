@@ -107,17 +107,17 @@ const orangeIcon = new L.Icon({
 
  function getColor(id){
 
-        if(id===1){
+        if(id==='Basura'){
             return redIcon;
 
         }
-        if(id===2){
+        if(id==='Bache'){
             return greenIcon;
         }
-        if(id===3){
+        if(id==='Semaforo'){
             return orangeIcon;
         }
-        if(id===4){
+        if(id==='Alumbrado'){
             return violetIcon;
         }
     
@@ -144,7 +144,7 @@ const orangeIcon = new L.Icon({
 
     layer= L.geoJSON(null,{
     pointToLayer: function (feature, latlng) {
-      return L.marker(latlng,{icon: getColor(feature.properties.id)});
+      return L.marker(latlng,{icon: getColor(feature.properties.estado)});
     },
     onEachFeature: function (feature, layer) {
       if(feature['properties']['estado'] === 'Activo' ){
