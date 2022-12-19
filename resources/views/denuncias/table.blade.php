@@ -1,5 +1,8 @@
+
 <div class="table-responsive" style="padding:15px;">
     <table class="table" id="tabla">
+
+
         <thead>
         <tr>
             <th>Imagen</th>
@@ -10,6 +13,7 @@
         <th>Categoria</th>
         <th>Estado</th>
             <th>Accion</th>
+
         </tr>
         </thead>
         <tbody>

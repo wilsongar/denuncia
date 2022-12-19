@@ -6,11 +6,13 @@ use App\Http\Requests\CreateDenunciaRequest;
 use App\Http\Requests\UpdateDenunciaRequest;
 use App\Repositories\DenunciaRepository;
 use App\Http\Controllers\AppBaseController;
+
 use App\Http\Controllers\DenunciaController;
 use Illuminate\Http\Request;
 use App\Models\Estado;
 use App\Models\Categoria;
 use App\Models\Denuncia;
+
 
 use Flash;
 use Response;
@@ -96,6 +98,7 @@ class DenunciaController extends AppBaseController
             $features[] = array(
                     'type' => 'Feature',
                     'geometry' => array('type' => 'Point', 'coordinates' => array((float)$value['longitud'],(float)$value['latitud'])),
+
                     'properties' => array('id' => $value['id'], 'descripcion' => $value['descripcion'],'categoria_id' => $value['id_categoria'],'estado_id' => $value['id_estado'],'fecha' => $value['fecha'],'categoria' => $value['categoria'], 'estado' => $value['estado']),
                     );
             };   

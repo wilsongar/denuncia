@@ -152,6 +152,7 @@
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 </script>
+
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -183,6 +184,7 @@ https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js
         } );
 } );
 </script>
+
 @stack('third_party_scripts')
 
 @stack('page_scripts')

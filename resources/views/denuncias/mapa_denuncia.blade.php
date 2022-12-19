@@ -56,7 +56,11 @@
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           }).addTo(map);
+
          var layer;
+
+         
+
 const greenIcon = new L.Icon({
       iconUrl:
         "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
@@ -100,7 +104,9 @@ const orangeIcon = new L.Icon({
       shadowSize: [41, 41]
     });
 
+
  function getColor(id){
+
         if(id===1){
             return redIcon;
 
@@ -117,6 +123,7 @@ const orangeIcon = new L.Icon({
     
 
     } 
+
       $("#borrar").click(function() {
 
        map.eachLayer(function (layer) {
@@ -146,6 +153,7 @@ const orangeIcon = new L.Icon({
     layer.bindPopup("Denuncia ID: "+feature.properties.id+" Descripcion: "+feature.properties.descripcion+" Categoria: "+feature.properties.categoria+" Estado: "+feature.properties.estado+""
     );
   }
+
   });
 
 layer.addData(JSON.parse(data));
