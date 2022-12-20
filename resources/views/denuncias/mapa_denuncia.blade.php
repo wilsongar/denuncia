@@ -144,7 +144,7 @@ const orangeIcon = new L.Icon({
 
     layer= L.geoJSON(null,{
     pointToLayer: function (feature, latlng) {
-      return L.marker(latlng,{icon: getColor(feature.properties.estado)});
+      return L.marker(latlng,{icon: getColor(feature.properties.categoria)});
     },
     onEachFeature: function (feature, layer) {
       if(feature['properties']['estado'] === 'Activo' ){

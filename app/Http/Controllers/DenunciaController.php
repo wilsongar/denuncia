@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Estado;
 use App\Models\Categoria;
 use App\Models\Denuncia;
-
+use Auth;
 
 use Flash;
 use Response;
@@ -35,11 +35,17 @@ class DenunciaController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $denuncias = $this->denunciaRepository->all();
+    {   
+        if(auth()->user()->hasRole('Usuario')){
+                $denuncias= Denuncia::where('id_user', auth()->user()->id)->get();  
+
+        }else {
+                 $denuncias= $this->denunciaRepository->all();
+        }
+        
 
         return view('denuncias.index')
-            ->with('denuncias', $denuncias);
+            ->with('denuncias', $denuncias)->with('user', Auth::user());
     }
 
     /**
@@ -76,8 +82,22 @@ class DenunciaController extends AppBaseController
 
 
         $locales;
-
+        if(auth()->user()->hasRole('Usuario')){ 
         if($categoria==0 & $estado==0 ){
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->where('id_user', auth()->user()->id)->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->get();
+        }
+        if($categoria>0 & $estado==0 ){
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->where('id_user', auth()->user()->id)->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where('id_categoria',$categoria)->get();
+        }
+        if($categoria==0 & $estado>0 ){
+            $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->where('id_user', auth()->user()->id)->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where('id_estado',$estado)->get();
+        }
+        if($categoria>0 & $estado>0 ){
+            $locales = Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->where('id_user', auth()->user()->id)->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where(['id_categoria'=>$categoria, 'id_estado'=>$estado])->get();
+        }
+
+        }else {
+                 if($categoria==0 & $estado==0 ){
             $locales =  Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->get();
         }
         if($categoria>0 & $estado==0 ){
@@ -89,6 +109,8 @@ class DenunciaController extends AppBaseController
         if($categoria>0 & $estado>0 ){
             $locales = Denuncia::join('estados','denuncias.id_estado', '=','estados.id',)->join('categorias','denuncias.id_categoria', '=','categorias.id')->select('denuncias.*', 'categorias.nombre as categoria', 'estados.nombre as estado')->where(['id_categoria'=>$categoria, 'id_estado'=>$estado])->get();
         }
+        }
+        
 
 
         $original_data = json_decode($locales, true);
@@ -116,7 +138,7 @@ class DenunciaController extends AppBaseController
      */
     public function store(CreateDenunciaRequest $request)
     {
-        $input = $request->all();
+       $input = $request->all();
          if($request->hasFile('imagen')){
             $input['imagen']=$request->file('imagen')->store('uploads','public');   
         }

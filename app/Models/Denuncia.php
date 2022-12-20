@@ -18,6 +18,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property string $fecha
  * @property intenger $id_categoria
  * @property intenger $id_estado
+ * @property intenger $id_user
  */
 class Denuncia extends Model implements Auditable
 {
@@ -39,7 +40,8 @@ class Denuncia extends Model implements Auditable
         'longitud',
         'fecha',
         'id_categoria',
-        'id_estado'
+        'id_estado',
+        'id_user'
     ];
 
     /**
@@ -76,6 +78,10 @@ class Denuncia extends Model implements Auditable
     }
       public function estado (){
      return $this-> belongsTo('App\Models\Estado','id_estado');
+
+    }
+    public function user (){
+     return $this-> belongsTo('App\Models\User','id_user');
 
     }
 }

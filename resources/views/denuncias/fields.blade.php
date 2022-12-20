@@ -1,5 +1,10 @@
-<!-- Imagen Field -->
+<!-- user Field -->
+<div class="form-group col-md-6 pull-left">
+<label for="id_user">Usuario:</label>
+            <input type="text" name="id_user" class="form-control" value="{{ Auth::user()->id }}" readonly>
+        </div>
 
+<!-- Imagen Field -->
 <div class="form-group col-sm-6">
   {!! Form::label('imagen', 'Imagen:') !!}
 <div class="input-group">
