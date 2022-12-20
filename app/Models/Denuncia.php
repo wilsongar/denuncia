@@ -63,13 +63,6 @@ class Denuncia extends Model implements Auditable
      * @var array
      */
     public static $rules = [
-        'imagen' => 'required',
-        'descripcion' => 'required',
-        'latitud' => 'required',
-        'longitud' => 'required',
-        'fecha' => 'required',
-        'id_categoria' => 'required',
-        'id_estado' => 'required'
     ];
 
       public function categoria (){

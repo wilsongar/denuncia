@@ -11,7 +11,7 @@
 <li class="nav-item">
     <a href="{{ route('categorias.index') }}"
        class="nav-link {{ Request::is('categorias*') ? 'active' : '' }}">
-       <i class="fa fas-solid fa-list"></i>
+       <i class="fa fas-solid fa-layer-group"></i>
         <p>Categorias</p>
     </a>
 </li>
@@ -37,7 +37,7 @@
 
 <li class="nav-item">
     <a href="{{ route('mapa') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+       class="nav-link {{ Request::is('mapa*') ? 'active' : '' }}">
        <i class="fa fas-solid fa-map"></i>
         <p>Mapa de Denuncias</p>
     </a>

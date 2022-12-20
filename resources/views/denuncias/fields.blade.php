@@ -9,7 +9,7 @@
   {!! Form::label('imagen', 'Imagen:') !!}
 <div class="input-group">
 <div class="custom-file">
-{!! Form::file('imagen', null, ['class' => 'form-control', 'id' => 'imagen']) !!}
+{!! Form::file('imagen', null, ['class' => 'form-control', 'id' => 'imagen','required']) !!}
 <label class="custom-file-label" for="imagen">Seleccionar Archivo</label>
 </div>
 
@@ -18,26 +18,27 @@
 <!-- Descripcion Field -->
 <div class="form-group col-sm-6 ">
     {!! Form::label('descripcion', 'Descripcion:') !!}
-    {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
+    {!! Form::text('descripcion', null, ['class' => 'form-control','required']) !!}
 </div>
 
 <!-- Latitud Field -->
 <div class="form-group col-sm-6 d-none">
     {!! Form::label('latitud', 'Latitud:') !!}
-    {!! Form::text('latitud', null, ['class' => 'form-control']) !!}
+    {!! Form::text('latitud', null, ['class' => 'form-control','required']) !!}
 </div>
 
 <!-- Longitud Field -->
 <div class="form-group col-sm-6 d-none">
     {!! Form::label('longitud', 'Longitud:') !!}
-    {!! Form::text('longitud', null, ['class' => 'form-control']) !!}
+    {!! Form::text('longitud', null, ['class' => 'form-control','required']) !!}
 </div>
 
 <!-- Fecha Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('id_categoria', 'Id Categoria:') !!}
-    {!! Form::select('id_categoria', $categoria, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('id_categoria', $categoria, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion','required']) !!}
 </div>
+
 
 @push('page_scripts')
     <script type="text/javascript">
@@ -53,17 +54,20 @@
 
 <div class="form-group col-sm-6">
     {!! Form::label('fecha', 'Fecha:') !!}
-    {!! Form::text('fecha', null, ['class' => 'form-control','id'=>'fecha']) !!}
+    {!! Form::text('fecha', null, ['class' => 'form-control','id'=>'fecha','required']) !!}
 </div>
 
 <!-- Id Estado Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('id_estado', 'Id Estado:') !!}
-    {!! Form::select('id_estado',$estado, null, ['class' => 'form-control custom-select']) !!}
-</div>
+
+
+<div class="form-group col-md-6 pull-left">
+<label for="id_user">Estado:</label>
+            <input type="text" name="id_estado" class="form-control" value="1" placeholder="Activo" readonly>
+        </div>
 <div class="form-group col-sm-12">
 <div id="map"></div>
 </div>
+
 <style type="text/css">
     #map { height: 360px; }
 </style>
