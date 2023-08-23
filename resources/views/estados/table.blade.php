@@ -1,9 +1,9 @@
-<div class="table-responsive">
-    <table class="table" id="estados-table">
+<div class="table-responsive" style="padding:15px;">
+    <table class="table" id="tabla">
         <thead>
         <tr>
             <th>Nombre</th>
-            <th colspan="3">Action</th>
+            <th>Acción</th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Está seguro/a que desea continuar?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

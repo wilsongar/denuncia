@@ -6,7 +6,7 @@ use App\Http\Requests\CreateDenunciaRequest;
 use App\Http\Requests\UpdateDenunciaRequest;
 use App\Repositories\DenunciaRepository;
 use App\Http\Controllers\AppBaseController;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\DenunciaController;
 use Illuminate\Http\Request;
 use App\Models\Estado;
@@ -36,16 +36,19 @@ class DenunciaController extends AppBaseController
      */
     public function index(Request $request)
     {   
-        if(auth()->user()->hasRole('Usuario')){
-                $denuncias= Denuncia::where('id_user', auth()->user()->id)->get();  
+        if(Auth::user()->hasRole('Admin')) {
+               $denuncias= $this->denunciaRepository->all(); 
+               return view('denuncias.index',compact('denuncias'));
 
-        }else {
-                 $denuncias= $this->denunciaRepository->all();
+        }else{
+
+               $denuncias = Denuncia::all()
+        ->where('id_user', auth()->user()->id);
+
+                return view('denuncias.index')->with('denuncias', $denuncias)->with('user', Auth::user());
         }
         
-
-        return view('denuncias.index')
-            ->with('denuncias', $denuncias)->with('user', Auth::user());
+        
     }
 
     /**
@@ -55,10 +58,12 @@ class DenunciaController extends AppBaseController
      */
     public function create()
     {
-        
+    
+        $estado2 = Estado::where('id', 1)
+        ->pluck('nombre','id');
         $estado = Estado::pluck('nombre','id');
         $categoria = Categoria::pluck('nombre','id');    
-        return view('denuncias.create',compact('estado','categoria'));
+        return view('denuncias.create',compact('estado','categoria','estado2'));
     
     }
     public function mapa(){
@@ -144,7 +149,7 @@ class DenunciaController extends AppBaseController
         }
         $denuncia = $this->denunciaRepository->create($input);
 
-        Flash::success('Denuncia saved successfully.');
+        Flash::success('Reporte guardado con éxito.');
 
         return redirect(route('denuncias.index'));
     }
@@ -201,21 +206,35 @@ class DenunciaController extends AppBaseController
      */
     public function update($id, UpdateDenunciaRequest $request)
     {
-        $denuncia = $this->denunciaRepository->find($id);
+            $rules=[
+        
+        'imagen'
+        ];
+        $mensaje = [
+        'required'=>'El :attribute es requerido',
+      ];
 
-        if (empty($denuncia)) {
-            Flash::error('Denuncia not found');
-
-            return redirect(route('denuncias.index'));
-        }
-
-        $denuncia = $this->denunciaRepository->update($request->all(), $id);
-
-        Flash::success('Denuncia updated successfully.');
+        if($request->hasFile('imagen')){
+            $campo=['imagen'=>'required|mines:jpeg,png,jpg'];
+            $mensaje = [
+        'required'=>'El :attribute es requerido',
+      ];
+  }
+   $this->validate($request,$rules,$mensaje);
+        $dato= request()->except(['_token','_method']);
+        //dd($dato);
+        if($request->hasFile('imagen')){
+            $denuncia=Denuncia::findOrFail($id);
+            Storage::delete('public/'.$denuncia->imagen); 
+            $dato['imagen']=$request->file('imagen')->store('uploads','public'); 
+    }
+        Denuncia::where('id','=',$id)->update($dato);  
+        $denuncia=Denuncia::findOrFail($id);
+        Flash::success('Reporte ciudadano actualizado.');
 
         return redirect(route('denuncias.index'));
     }
-
+    
     /**
      * Remove the specified Denuncia from storage.
      *
@@ -237,7 +256,7 @@ class DenunciaController extends AppBaseController
 
         $this->denunciaRepository->delete($id);
 
-        Flash::success('Denuncia deleted successfully.');
+        Flash::success('Reporte eliminado con éxito.');
 
         return redirect(route('denuncias.index'));
     }

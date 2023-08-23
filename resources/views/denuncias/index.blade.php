@@ -5,14 +5,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Denuncias</h1>
+                    <h1>Todos los Reportes Ciudadano</h1>
                 </div>
+                 @if(Auth::user()->hasRole('Admin'))
+                 @else
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('denuncias.create') }}">
-                        Registrar Denuncia
+                        NUEVO REPORTE
                     </a>
                 </div>
+                @endif
             </div>
         </div>
     </section>

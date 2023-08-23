@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Denuncia</h1>
+                    <h1>Editar Reporte</h1>
                 </div>
             </div>
         </div>
@@ -17,47 +17,45 @@
 
         <div class="card">
 
-            {!! Form::model($denuncia, ['route' => ['denuncias.update', $denuncia->id], 'method' => 'patch']) !!}
+            {!! Form::model($denuncia, ['route' => ['denuncias.update', $denuncia->id], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
             <div class="card-body">
                 <div class="row">
-                   <!-- user Field -->
-<div class="form-group col-md-6 pull-left">
-<label for="id_user">Usuario:</label>
-            <input type="text" name="id_user" class="form-control" value="{{ Auth::user()->id }}" readonly>
-        </div>
-
+              
 <!-- Imagen Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('imagen', 'Imagen:') !!}
-<div class="input-group">
-<div class="custom-file">
-<img src="{{ asset('storage').'/'.$denuncia->imagen}}" width="50" height="50">
-</div>
-
-</div>
-</div>
+              {!! Form::label('imagen', 'Imagen:') !!}
+            <div class="input-group">
+            <div class="custom-file">
+            {!! Form::file('imagen', null, ['class' => 'form-control', 'id' => 'imagen','required']) !!}
+            <label class="custom-file-label" for="imagen">Seleccionar Archivo</label>
+            </div>
+            </div>
+            @if(isset($documento->imagen))
+           <img src="{{ asset('storage').'/'.$denuncia->imagen}}" width="50" height="50">
+            @endif
+            </div>
 <!-- Descripcion Field -->
 <div class="form-group col-sm-6 ">
-    {!! Form::label('descripcion', 'Descripcion:') !!}
-    {!! Form::text('descripcion', null, ['class' => 'form-control','disabled']) !!}
+    {!! Form::label('descripcion', 'Descripción:') !!}
+    {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Latitud Field -->
 <div class="form-group col-sm-6 d-none">
     {!! Form::label('latitud', 'Latitud:') !!}
-    {!! Form::text('latitud', null, ['class' => 'form-control','disabled']) !!}
+    {!! Form::text('latitud', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Longitud Field -->
 <div class="form-group col-sm-6 d-none">
     {!! Form::label('longitud', 'Longitud:') !!}
-    {!! Form::text('longitud', null, ['class' => 'form-control','disabled']) !!}
+    {!! Form::text('longitud', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Fecha Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_categoria', 'Id Categoria:') !!}
+    {!! Form::label('id_categoria', 'Categoria:') !!}
     {!! Form::select('id_categoria', $categoria, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion']) !!}
 </div>
 
@@ -75,17 +73,25 @@
 
 <div class="form-group col-sm-6">
     {!! Form::label('fecha', 'Fecha:') !!}
-    {!! Form::text('fecha', null, ['class' => 'form-control','id'=>'fecha','disabled']) !!}
+    {!! Form::text('fecha', null, ['class' => 'form-control','id'=>'fecha']) !!}
 </div>
-
+ @if(Auth::user()->hasRole('Admin'))
 <!-- Id Estado Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_estado', 'Id Estado:') !!}
-    {!! Form::select('id_estado',$estado, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion']) !!}
+    {!! Form::label('id_estado', 'Estado:') !!}
+    {!! Form::select('id_estado',$estado, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion',]) !!}
 </div>
+@else
+<!-- Id Estado Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('id_estado', 'Estado:') !!}
+    {!! Form::select('id_estado',$estado, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion','disabled']) !!}
+</div>
+@endif
+
 <table class="table table-bordered" id="data-table">
               <tr>
-                <th><i class="cil-globe-alt fa-2x"></i> <strong>Ubicacion de denuncia.</strong></th>
+                <th><i class="cil-globe-alt fa-2x"></i> <strong>Ubicación del reporte ciudadano.</strong></th>
               </tr>
                    
                    <tr>
@@ -102,8 +108,8 @@
          </div>
     </li>
     </ul>
-     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('denuncias.index') }}" class="btn btn-default">Cancel</a>
+     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('denuncias.index') }}" class="btn btn-default">Cancelar</a>
          
     <style type="text/css">
                    #map { height: 350px; width:1350px; }

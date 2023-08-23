@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Categoria</h1>
+                    <h1>Crear Categoría</h1>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('categorias.index') }}" class="btn btn-default">Atras</a>
+                <a href="{{ route('categorias.index') }}" class="btn btn-default">Atrás</a>
             </div>
 
             {!! Form::close() !!}

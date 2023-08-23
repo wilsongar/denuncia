@@ -1,11 +1,11 @@
-<div class="table-responsive">
-    <table class="table" id="users-table">
+<div class="table-responsive" style="padding:15px;">
+    <table class="table" id="tabla">
         <thead>
         <tr>
-            <th>Name</th>
+            <th>Nombre</th>
         <th>Email</th>
-        <th>Password</th>
-            <th colspan="3">Action</th>
+
+            <th>Acción</th>
         </tr>
         </thead>
         <tbody>
@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->password }}</td>
+            
                 <td width="120">
                     {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -25,7 +25,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Está seguro/a que desea continuar?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

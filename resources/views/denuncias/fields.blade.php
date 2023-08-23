@@ -17,7 +17,7 @@
 </div>
 <!-- Descripcion Field -->
 <div class="form-group col-sm-6 ">
-    {!! Form::label('descripcion', 'Descripcion:') !!}
+    {!! Form::label('descripcion', 'Descripción:') !!}
     {!! Form::text('descripcion', null, ['class' => 'form-control','required']) !!}
 </div>
 
@@ -35,7 +35,7 @@
 
 <!-- Fecha Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_categoria', 'Id Categoria:') !!}
+    {!! Form::label('id_categoria', 'Categoria:') !!}
     {!! Form::select('id_categoria', $categoria, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion','required']) !!}
 </div>
 
@@ -60,10 +60,22 @@
 <!-- Id Estado Field -->
 
 
-<div class="form-group col-md-6 pull-left">
-<label for="id_user">Estado:</label>
-            <input type="text" name="id_estado" class="form-control" value="1" placeholder="Activo" readonly>
-        </div>
+
+  @if(Auth::user()->hasRole('super_admin'))
+    <div class="form-group col-sm-6">
+    {!! Form::label('id_estado', 'Estado:') !!}
+    {!! Form::select('id_estado', $estado, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion','required']) !!}
+</div>
+    @else
+             <div class="form-group col-sm-6">
+    {!! Form::label('id_estado', 'Estado:') !!}
+    {!! Form::select('id_estado', $estado2, null, ['class' => 'form-control custom-select','placeholder'=>'Selecione una opcion','required']) !!}
+                </div>
+            @endif
+
+
+
+
 <div class="form-group col-sm-12">
 <div id="map"></div>
 </div>

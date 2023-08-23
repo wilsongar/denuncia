@@ -16,11 +16,11 @@
       <thead>
             <tr>
               <th>Model</th>
-              <th>Accion</th>
+              <th>Acción</th>
               <th>Usuario</th>
               <th>Tiempo</th>
-              <th>Old Values</th>
-              <th>New Values</th>
+              <th>Valor Anterior</th>
+              <th>Valor Nuevo</th>
             </tr>
           </thead>
           <tbody id="audits">

@@ -21,7 +21,7 @@
     <a href="{{ route('denuncias.index') }}"
        class="nav-link {{ Request::is('denuncias*') ? 'active' : '' }}">
           <i class="fa fas-solid fa-file"></i>
-        <p>Denuncias</p>
+        <p>Reportes</p>
     </a>
 </li>
 
@@ -39,7 +39,7 @@
     <a href="{{ route('mapa') }}"
        class="nav-link {{ Request::is('mapa*') ? 'active' : '' }}">
        <i class="fa fas-solid fa-map"></i>
-        <p>Mapa de Denuncias</p>
+        <p>Mapa de Reportes</p>
     </a>
 </li>
 
@@ -53,4 +53,6 @@
         <p>Auditoria</p>
     </a>
 </li>
+
+
 @endcan

@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Denuncia Details</h1>
+                    <h1>Detalle del reporte</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
                        href="{{ route('denuncias.index') }}">
-                        Back
+                        Atrás
                     </a>
                 </div>
             </div>

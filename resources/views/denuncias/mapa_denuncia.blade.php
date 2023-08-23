@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Mapa de Denuncias</h1>
+                    <h1>Mapa de Reportes</h1>
                 </div>
             </div>
         </div>
@@ -26,11 +26,11 @@
 
 <!-- Fecha Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('id_categoria', 'Id Categoria:') !!}
+    {!! Form::label('id_categoria', 'Categoria:') !!}
     {!! Form::select('id_categoria', $categoria, null, ['class' => 'form-control custom-select']) !!}
 </div>
 <div class="form-group col-sm-6">
-    {!! Form::label('id_estado', 'Id Estado:') !!}
+    {!! Form::label('id_estado', 'Estado:') !!}
     {!! Form::select('id_estado',$estado, null, ['class' => 'form-control custom-select']) !!}
 </div>
 <div class="form-group col-sm-3">
@@ -105,6 +105,39 @@ const orangeIcon = new L.Icon({
     });
 
 
+    const blueIcon = new L.Icon({
+      iconUrl:
+        "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+      shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const yellowIcon = new L.Icon({
+      iconUrl:
+        "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png",
+      shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    const greyIcon = new L.Icon({
+      iconUrl:
+        "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
+      shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
  function getColor(id){
 
         if(id==='Basura'){
@@ -114,15 +147,28 @@ const orangeIcon = new L.Icon({
         if(id==='Bache'){
             return greenIcon;
         }
-        if(id==='Semaforo'){
+        if(id==='Semáforo'){
             return orangeIcon;
         }
         if(id==='Alumbrado'){
             return violetIcon;
         }
-    
 
-    } 
+        if(id==='Césped'){
+            return blueIcon;
+        }
+
+        if(id==='Bancos'){
+            return yellowIcon;
+        }
+
+        if(id==='Pérdida de agua'){
+            return greyIcon;
+        }
+
+        }
+        
+
 
       $("#borrar").click(function() {
 
@@ -147,10 +193,10 @@ const orangeIcon = new L.Icon({
       return L.marker(latlng,{icon: getColor(feature.properties.categoria)});
     },
     onEachFeature: function (feature, layer) {
-      if(feature['properties']['estado'] === 'Activo' ){
+      if(feature['properties']['estado'] === 'Pendiente' ){
         layer.options.opacity = 1;
     }
-     if(feature['properties']['estado'] === 'En tramite' ){
+     if(feature['properties']['estado'] === 'En trámite' ){
         layer.options.opacity = 0.75;
     }
      if(feature['properties']['estado'] === 'Finalizado' ){
